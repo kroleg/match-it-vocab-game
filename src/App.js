@@ -55,7 +55,7 @@ class App extends Component {
     }
 
     startGame() {
-        const wordsToUse = getRandom(Object.entries(vocabulry), 15);
+        const wordsToUse = getRandom(Object.entries(vocabulry), 5);
         this.matchedWords = [];
         this.matchedDefinitions = [];
         this.left = wordsToUse.map(w2u => w2u[0]);
