@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/match-it-vocab-game/static/js/runtime~main.f3e3036e.js"
   },
   {
-    "revision": "ce2362793aa167d6e6d9",
-    "url": "/match-it-vocab-game/static/js/main.ce236279.chunk.js"
+    "revision": "9cce2e0ba3415e361798",
+    "url": "/match-it-vocab-game/static/js/main.9cce2e0b.chunk.js"
   },
   {
     "revision": "f9d4e250e3d4485a5b9d",
     "url": "/match-it-vocab-game/static/js/1.f9d4e250.chunk.js"
   },
   {
-    "revision": "ce2362793aa167d6e6d9",
+    "revision": "9cce2e0ba3415e361798",
     "url": "/match-it-vocab-game/static/css/main.b67da87d.chunk.css"
   },
   {
-    "revision": "f075ac5fe3124a9395c48c7e5e15658e",
+    "revision": "b4b76f05c2a9df259769821e87a66b0c",
     "url": "/match-it-vocab-game/index.html"
   }
 ];

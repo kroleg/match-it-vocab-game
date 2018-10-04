@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
 
 importScripts(
-  "/match-it-vocab-game/precache-manifest.3685a3c0e84d77a6b763ece3d48441de.js"
+  "/match-it-vocab-game/precache-manifest.8aca489ecfd623eb718a8dcd0589c599.js"
 );
 
 workbox.clientsClaim();
