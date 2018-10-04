@@ -93,7 +93,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        const tabName = window.location.hash ? window.location.hash.replace('#', '') : 'math';
+        const tabName = getParameterByName('tab', window.location.href) || 'math';
         fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${tabName}?key=${API_KEY}`).then(async res => {
             if (res.status !== 200) {
                 return this.setState({ error: 'Failed to retrieve data from google spreadsheet' });
@@ -168,4 +168,14 @@ function shuffle(array) {
     }
 
     return array;
+}
+
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
