@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import vocabulry from './vocab.js';
+
+const SPREADSHEET_ID = '1O9Nkp5MddsdFbCy4MbxmyySxtDd8ZB6KccWyYAMM-3A';
+const API_KEY = 'AIzaSyBs8RFSnZv_Vs1vvFBPZyd4q88M8p_9AMg';
 
 class App extends Component {
     constructor(props) {
@@ -13,7 +15,8 @@ class App extends Component {
             chosenWord: '',
             submitEnabled: false,
             submitted: false
-        }
+        };
+        this.vocabulary = {};
     }
 
     render() {
@@ -48,14 +51,14 @@ class App extends Component {
         if (!this.state.submitted) {
             return ''
         }
-        if (def === vocabulry[word]) {
+        if (def === this.vocabulary[word]) {
             return 'correct';
         }
         return 'incorrect';
     }
 
     startGame() {
-        const wordsToUse = getRandom(Object.entries(vocabulry), 5);
+        const wordsToUse = getRandom(Object.entries(this.vocabulary), 5);
         this.matchedWords = [];
         this.matchedDefinitions = [];
         this.left = wordsToUse.map(w2u => w2u[0]);
@@ -90,7 +93,22 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.startGame()
+        const tabName = window.location.hash ? window.location.hash.replace('#', '') : 'math';
+        fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${tabName}?key=${API_KEY}`).then(async res => {
+            if (res.status !== 200) {
+                return this.setState({ error: 'Failed to retrieve data from google spreadsheet' });
+            }
+            const data = await res.json();
+            try {
+                data.values.forEach(row => {
+                    this.vocabulary[row[0]] = row[1];
+                });
+                this.startGame()
+            } catch (err) {
+                return this.setState({ error: err.message });
+            }
+
+        });
     }
 }
 
